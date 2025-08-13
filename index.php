@@ -15,9 +15,11 @@ include 'db.php';
     <h2>Welcome to the home page</h2>
 
 <p>
-
-
     <a href="login.php">Login</a>
+</p>
+
+<p>
+    <a href="register.php">Register</a>
 </p>
 
 </body>

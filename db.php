@@ -1,11 +1,11 @@
 <php
 
-$con =mysqli_connect("localhost","root","","login_app");
+$conn =mysqli_connect("localhost","root","","login_app");
 
-if($con){
+if($conn){
     echo "Connected";
 } else{
-    echo "Not connected" . mysqli_error($con);
+    echo "Not connected" . mysqli_error($conn);
 }
 
 ?>
