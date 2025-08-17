@@ -1,26 +1,25 @@
-<php
-
-include 'db.php';
+<?php
+include "partials/header.php"
 ?>
 
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login App with SQL and PHP</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/index.css"> <!-- aqui conecta o CSS -->
 </head>
 <body>
 
-    <h2>Welcome to the home page</h2>
-
-<p>
-    <a href="login.php">Login</a>
-</p>
-
-<p>
-    <a href="register.php">Register</a>
-</p>
+<div class="overlay"></div>
+  <div class="conteudo">
+    <h2 id="titulo-principal" >Welcome to our PHP App</h2>
+    <?php include "partials/navigation.php";?>
+  </div>
 
 </body>
 </html>
+
+
+<?php include "partials/footer.php";?>

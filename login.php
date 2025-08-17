@@ -1,5 +1,16 @@
 <?php
 
+include 'db.php';
+session_start();
+
+
+/* Isso faz com que não dê para voltar para o register e sim só o login*/
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true){
+    header("Location: admin.php");
+    exit;
+}
+
+
 $error= "";
 
 if($_SERVER["REQUEST_METHOS"]== "POST"){
@@ -14,8 +25,12 @@ if($_SERVER["REQUEST_METHOS"]== "POST"){
             $user = mysqli_fetch_assoc($result);
 
             if(password_verify($password, $user['password'])){
-                
+                $_SESSION['logged_in']=true;
+                $_SESSION['username'] = $user['username'];
+                header("Location: admin.php");
                 exit;
+            } else {
+                $error = "Invalid username";
             }
 
         }else{
@@ -34,7 +49,7 @@ if($_SERVER["REQUEST_METHOS"]== "POST"){
 </head>
 <body>
 
-<h2>Register</h2>
+<h2>Login</h2>
 
 <?php if($error): ?>
 
