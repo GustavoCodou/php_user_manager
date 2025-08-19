@@ -15,6 +15,12 @@ body {
     font-size: 40px;
 }
 
+#titulo-secundario{
+    color: aliceblue;
+    font-size: 25px;
+}
+
+
 
 /* Overlay preto semi-transparente */
     .overlay {

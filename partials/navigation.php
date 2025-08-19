@@ -6,9 +6,6 @@
 
     
 
-<li>
-    <a href="index.php">Home</a>
-</li>
 
 <!-- Aqui dependendo se estiver logado aparece uma opção diferente-->
 <?php if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
@@ -27,7 +24,7 @@
     </li>
 
     <li>
-        <a href="login.php">Register</a>
+        <a href="login.php">login</a>
     </li>
 
 <?php endif; ?>

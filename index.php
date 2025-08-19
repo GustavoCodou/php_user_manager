@@ -15,6 +15,7 @@ include "partials/header.php"
 <div class="overlay"></div>
   <div class="conteudo">
     <h2 id="titulo-principal" >Welcome to our PHP App</h2>
+    <h2 id="titulo-secundario" >Securely login and manage your account with us</h2>
     <?php include "partials/navigation.php";?>
   </div>
 
