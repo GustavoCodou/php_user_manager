@@ -1,11 +1,27 @@
-<php
+<?php
 
-$conn =mysqli_connect("localhost","root","","login_app");
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "login_app";
 
-if($conn){
-    echo "Connected";
-} else{
-    echo "Not connected" . mysqli_error($conn);
+$conn = mysqli_connect($host, $username ,$password, $database);
+
+if(!$conn){
+
+    die("Connection failed" . mysqli_connect_error());
+
+} else {
+//       echo "Connected";
 }
 
-?>
+function check_query($result){
+    global $conn;
+    if(!$result){
+        return "Error" . mysqli_error($conn);
+    }
+    return true;
+}
+
+
+
