@@ -1,30 +1,58 @@
 <?php
 include "partials/header.php";
+/*Por ter o include do header já puxa os includes que o header tinha */
 include "partials/navigation.php";
 
 if(!is_user_logged_in()){
     redirect("login.php");
 }
 
+/* Se não estiver logado redireciona para a pagina de login */
+ 
 $result = mysqli_query($conn, "SELECT id, username, email, reg_date FROM users");
 
+/*  O result vai ser um objeto do mysqli que vai conter os dados*/
+
+
+/*  '$_SERVER uma variavel do  php é um array associativo 
+    Faz a requisição do servidor dos dados por metodo post
+*/
 if($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if(isset($_POST['edit_user'])){
+
+        /* O isset é uma função que verifica se a variavel está definida e não é nula
+            O post edit user vai pegar a variavel com o nem edit user
+        */
 
         $user_id = mysqli_real_escape_string($conn, $_POST['user_id']);
         $new_username = mysqli_real_escape_string($conn, $_POST['username']);
         $new_email = mysqli_real_escape_string($conn, $_POST['email']);
 
+        /* Tem que usar o escape string porque alguem poderia colocar uma sintaxe slq de ataque
+        Ai daria ruim, essa função impede essas coisas.
+        $username = "Kaiba'; DROP TABLE users; --";
+        */
+
+
         $sql = "UPDATE users SET email = '$new_email', username = '$new_username' WHERE id = $user_id";
         $result = mysqli_query($conn, $sql);
         $query_status = check_query($result);
+
+        /* 
+            Aqui faz a sql aplica e mostra se funcionou
+        */
 
         if($query_status === true){
             $_SESSION['message'] = "User updated successfully to {$new_username}";
             $_SESSION['msg_type'] = "success";
             redirect("admin.php");
         }
+
+        /* 
+            $_SESSION é um array que permite guardar dados que permanecem entre páginas.
+            Então provavelmente aquilo vai ser printado em outro lugar depois
+        */
 
     } elseif(isset($_POST['delete_user'])){
         $user_id = mysqli_real_escape_string($conn, $_POST['user_id']);
@@ -38,6 +66,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
             redirect("admin.php");
         }
 
+        /* 
+            Se entendeu o resto isso aqui tu entende tb
+        */
+
     }
 
 }
@@ -48,9 +80,16 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
     <?php if(isset($_SESSION['message'])): ?>
         <div class="notification <?php echo $_SESSION['msg_type']; ?>">
             <?php
+
                 echo $_SESSION['message'];
                 unset($_SESSION['message']);
                 unset($_SESSION['msg_type'])
+
+                
+        /* 
+            Aqui analisa se tem a messagem para enviar se tiver envia
+        */
+
             ?>
         </div>
     <?php endif; ?>
@@ -66,11 +105,27 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
         </thead>
         <tbody>
 
+<!-- 
+<table> → cria uma tabela na página.
+<thead> → define o cabeçalho da tabela (onde ficam os títulos das colunas).
+<tr> → significa table row → uma linha da tabela.
+<th> → significa table header → é uma célula de cabeçalho (em negrito e centralizada por padrão).
+<tbody> → agrupa o corpo da tabela, ou seja, as linhas com os dados de verdade (usuários, produtos 
+    <td> → Table Data (célula de dados)
+-->
+
         <?php while ($user = mysqli_fetch_assoc($result)): ?>
+<!-- 
+A função mysqli_fetch_assoc($result) faz o seguinte:
+Ela pega uma linha do resultado de uma consulta SQL ($result)
+E retorna essa linha como um array associativo → ou seja, um array onde as chaves são os nomes das colunas do banco.
+-->
+
         <tr>
             <td><?php echo $user['id'];  ?></td>
             <td><?php echo $user['username'];  ?></td>
             <td><?php echo $user['email'];  ?></td>
+            
             <td><?php echo full_month_date($user['reg_date']); ?>
             </td>
             <td>

@@ -20,3 +20,18 @@
         <?php endif; ?>
     </ul>
 </nav>
+
+<!-- <nav> → indica uma área de navegação da página (menu).
+
+<ul> → lista não ordenada.
+
+<li> → item da lista.
+
+<a> → link para outra página.
+
+class="?php echo setActiveCLass('index.php'); ?>" → aqui, a função PHP setActiveCLass() ]
+define dinamicamente a classe CSS do link “Home”. 
+Singifica que se o usuario tiver na apgina ativa a classe ative e assim vai ficar marcado
+que nas opções a pagina certa que ele está.
+
+-->
